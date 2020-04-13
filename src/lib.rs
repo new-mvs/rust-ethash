@@ -343,4 +343,63 @@ mod tests {
         let mixh = light_dag.hashimoto(partial_header_hash, H64::from(hex!("a5d3d0ccc8bb8a29"))).0;
         assert_eq!(mixh, H256::from(hex!("543bc0769f7d5df30e7633f4a01552c2cee7baace8a6da37fddaa19e49e81209")));
     }
+
+    #[test]
+    fn hashimoto_should_work_latest() {
+//        let start = SystemTime::now();
+        type DAG = LightDAG<EthereumPatch>;
+        let light_dag = DAG::new(0x93806d.into());
+//        println!(
+//            "{:?} ms",
+//            SystemTime::now().duration_since(start).unwrap().as_millis()
+//        );
+
+//        let start = SystemTime::now();
+        // bare_hash of block#9666669  on ethereum mainnet
+        let partial_header_hash = H256::from(hex!(
+			"6063429cc9580b4c437d7547cdbf07df0c4bf7ab0cb6e0d6f74ab00f949f174c"
+		));
+        let mixh = light_dag
+            .hashimoto(partial_header_hash, H64::from(hex!("726446620418cc02")))
+            .0;
+//        println!(
+//            "{:?} ms",
+//            SystemTime::now().duration_since(start).unwrap().as_millis()
+//        );
+
+        assert_eq!(
+            mixh,
+            H256::from(hex!(
+				"7daba05fcefc814682e0caf337800780de3f9737fac71826d90eddcedd89b1da"
+			))
+        );
+    }
+
+    #[test]
+    fn hashimoto_should_work_on_ropsten() {
+        type DAG = LightDAG<EthereumPatch>;
+        let light_dag = DAG::new(0x672884.into());
+        let partial_header_hash = H256::from(hex!("9cb3d16b788bfc7f2569db2d1fedb5b1e9633acfe84a4eca44a9fa50979a9887"));
+        let mixh = light_dag
+            .hashimoto(partial_header_hash, H64::from(hex!("9348d06003756cff")))
+            .0;
+        assert_eq!(
+            mixh,
+            H256::from(hex!("e06f0c107dcc91e9e82de0b42d0e22d5c2cfae5209422fda88cff4f810f4bffb"))
+        );
+    }
+
+    #[test]
+    fn hashimoto_should_work_on_ropsten_earlier() {
+        type DAG = LightDAG<EthereumPatch>;
+        let light_dag = DAG::new(0x11170.into());
+        let partial_header_hash = H256::from(hex!("bb698ea6e304a7a88a6cd8238f0e766b4f7bf70dc0869bd2e4a76a8e93fffc80"));
+        let mixh = light_dag
+            .hashimoto(partial_header_hash, H64::from(hex!("475ddd90b151f305")))
+            .0;
+        assert_eq!(
+            mixh,
+            H256::from(hex!("341e3bcf01c921963933253e0cf937020db69206f633e31e0d1c959cdd1188f5"))
+        );
+    }
 }

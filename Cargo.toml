@@ -7,11 +7,15 @@ license = "Apache-2.0"
 edition = "2018"
 
 [dependencies]
-ethereum-types = { version = "0.8", default-features = false }
-primitive-types = { version = "0.6", default-features = false, features = ["rlp"] }
+#ethereum-types = { version = "0.8", default-features = false }
+#primitive-types = { version = "0.6", default-features = false, features = ["rlp"] }
 rlp = { version = "0.4", default-features = false }
 byteorder = { version = "1", default-features = false }
 sha3 = { version = "0.8", default-features = false }
+
+# github
+ethereum-types = { default-features = false, git = "https://github.com/darwinia-network/parity-common.git" }
+primitive-types = { default-features = false, features = ["rlp"], git = "https://github.com/darwinia-network/parity-common.git" }
 
 [dev-dependencies]
 hex-literal = "0.2.1"
@@ -20,6 +24,7 @@ hex-literal = "0.2.1"
 default = ["std"]
 std = [
   "ethereum-types/std",
+  "primitive-types/std",
   "rlp/std",
   "byteorder/std",
   "sha3/std",
