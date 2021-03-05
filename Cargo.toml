@@ -14,8 +14,8 @@ byteorder = { version = "1", default-features = false }
 sha3 = { version = "0.8", default-features = false }
 
 # github
-ethereum-types = { default-features = false, git = "https://github.com/darwinia-network/parity-common.git" }
-primitive-types = { default-features = false, features = ["rlp"], git = "https://github.com/darwinia-network/parity-common.git" }
+ethereum-types = { default-features = false, git = "https://github.com/new-mvs/parity-common.git" }
+primitive-types = { default-features = false, features = ["rlp"], git = "https://github.com/new-mvs/parity-common.git" }
 
 [dev-dependencies]
 hex-literal = "0.2.1"
